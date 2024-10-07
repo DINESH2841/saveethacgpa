@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAVEETHA Advanced CGPA Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f39c12;
+            --background-color: #1a1a2e;
+            --text-color: #ffffff;
+            --input-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-color: #3a7bd5;
+            transform: translateY(-2px);
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--secondary-color);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .show-result {
+            opacity: 1 !important;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            input[type="number"] {
+                width: 50px;
+                font-size: 14px;
+            }
+
+            button {
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>SAVEETHA Advanced CGPA Calculator</h1>
+        <div class="input-group">
+            <label for="s">Number of S grades:</label>
+            <input type="number" id="s" min="0" value="0">
+        </div>
+        <div class="input-group">
+            <label for="a">Number of A grades:</label>
+            <input type="number" id="a" min="0" value="0">
+        </div>
+        <div class="input-group">
+            <label for="b">Number of B grades:</label>
+            <input type="number" id="b" min="0" value="0">
+        </div>
+        <div class="input-group">
+            <label for="c">Number of C grades:</label>
+            <input type="number" id="c" min="0" value="0">
+        </div>
+        <div class="input-group">
+            <label for="d">Number of D grades:</label>
+            <input type="number" id="d" min="0" value="0">
+        </div>
+        <div class="input-group">
+            <label for="e">Number of E grades:</label>
+            <input type="number" id="e" min="0" value="0">
+        </div>
+        <div class="input-group">
+            <label for="f">Number of F grades:</label>
+            <input type="number" id="f" min="0" value="0">
+        </div>
+        <button onclick="calculateCGPA()">Calculate CGPA</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateCGPA() {
+            const grades = ['s', 'a', 'b', 'c', 'd', 'e', 'f'];
+            const gradePoints = [10, 9, 8, 7, 6, 5, 0];
+            let totalCredits = 0;
+            let totalGradePoints = 0;
+
+            grades.forEach((grade, index) => {
+                const count = parseInt(document.getElementById(grade).value) || 0;
+                totalCredits += count;
+                totalGradePoints += count * gradePoints[index];
+            });
+
+            if (totalCredits === 0) {
+                document.getElementById('result').innerText = "Please enter at least one grade.";
+                document.getElementById('result').classList.add('show-result');
+                return;
+            }
+
+            const cgpa = (totalGradePoints / totalCredits).toFixed(2);
+            const resultElement = document.getElementById('result');
+            resultElement.classList.add('show-result');
+
+            animateValue(resultElement, 0, cgpa, 2000);
+        }
+
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentValue = progress * (end - start) + start;
+                obj.innerHTML = `Your CGPA is: ${currentValue.toFixed(2)}`;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Easter egg: Konami code
+        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    activateEasterEgg();
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        function activateEasterEgg() {
+            document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
+            alert('Congratulations! You\'ve unlocked the secret rainbow mode!');
+        }
+    </script>
+</body>
+
+</html>
