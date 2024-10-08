@@ -14,7 +14,7 @@ An interactive web-based calculator designed for students at SAVEETHA University
 - **JavaScript**: For CGPA calculation logic and UI interactivity.
 
 ## Demo
-You can access the calculator via [Google Drive](https://github.com/DINESH2841/saveethacgpa) or host it on [GitHub Pages](https://your-github-pages-url).
+You can access the calculator via [Google Drive]([https://dinesh2841.github.io/saveethacgpa/]) or host it on [GitHub Pages]([https://dinesh2841.github.io/saveethacgpa/]).
 
 ## How to Use
 
