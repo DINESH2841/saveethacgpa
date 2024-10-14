@@ -181,6 +181,7 @@
             <input type="number" id="f" min="0" value="0">
         </div>
         <button onclick="calculateCGPA()">Calculate CGPA</button>
+        <button onclick="goToAttendanceCalculator()">Go to Attendance Calculator</button>
         <div id="result"></div>
     </div>
 
@@ -222,6 +223,10 @@
                 }
             };
             window.requestAnimationFrame(step);
+        }
+
+        function goToAttendanceCalculator() {
+            window.location.href = 'https://dinesh2841.github.io/attendance_calculator/';
         }
 
         // Easter egg: Konami code
